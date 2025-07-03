@@ -148,13 +148,17 @@ const musicPlayer = {
             this.audioPlayer.currentTime = time;
             this.progressBar.seeking = false;
         };
-        this.playlistContainer.onmouseenter = (e) => {
-            const toggleBtn = e.target.closest(".song");
-            console.log(e.target);
-            console.log(toggleBtn);
-            if (toggleBtn) {
-            }
-        };
+        const songs = this.playlistContainer.querySelectorAll(".song");
+        songs.forEach((song) => {
+            song.onmouseenter = () => {
+                const toggleBtn = song.querySelector(".play-btn");
+                toggleBtn.classList.add("active");
+            };
+            song.onmouseleave = () => {
+                const toggleBtn = song.querySelector(".play-btn");
+                toggleBtn.classList.remove("active");
+            };
+        });
     },
     togglePlayPause() {
         if (this.audioPlayer.paused) {
